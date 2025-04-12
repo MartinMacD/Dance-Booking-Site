@@ -1,0 +1,15 @@
+{
+  "name": "webdevcw",
+  "version": "1.0.0",
+  "description": "Martin MacDonald - My web dev coursework - A booking system for a local dance organisation",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Martin MacDonald",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^5.1.0",
+    "path": "^0.12.7"
+  }
+}
