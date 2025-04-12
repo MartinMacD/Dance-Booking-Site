@@ -1,7 +1,13 @@
 const express = require('express');
 const router = express.Router();
 const controller = require('../controllers/publicControllers.js');
+const {login} = require('../auth/auth')
+const {verify} = require('../auth/auth')
 
+router.get('/login', controller.show_login);
+router.post('/login', login, controller.handle_login);
+router.get('/register', controller.show_register_page); 
+router.post('/register', controller.post_new_organiser);
 router.get("/", controller.landing_page);
 
 router.use(function(req, res) {

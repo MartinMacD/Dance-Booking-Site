@@ -1,0 +1,20 @@
+<html><head>
+{{>header}}
+</head>
+<body>
+<h1>{{title}}</h1>
+<div class="text-left" style="margin-bottom: 1em;">
+{{^user}}
+  <a id="login" href="/login" class="btn btn-primary">
+    Sign in
+  </a>
+  <a id="login" href="/register" class="btn btn-primary">
+ Register
+ </a>
+{{/user}}
+{{#user}}
+  <a id="logout" href="/logout" class="btn btn-primary">
+    Sign out
+  </a>
+{{/user}}
+</div>
