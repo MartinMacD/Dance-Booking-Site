@@ -23,6 +23,7 @@ exports.login = function (req, res,next) {
           //create the access token 
           let accessToken = jwt.sign(payload, process.env.ACCESS_TOKEN_SECRET,{expiresIn: 300}); 
           res.cookie("jwt", accessToken);
+          console.log("JWT cookie set:", accessToken);
           next();
         } else {
           return res.render("organiser/login"); //res.status(403).send();
@@ -39,6 +40,7 @@ exports.login = function (req, res,next) {
     let payload;
     try {
       payload = jwt.verify(accessToken, process.env.ACCESS_TOKEN_SECRET);
+      console.log("Payload:", payload);
       req.user = payload;
       next();
     } catch (e) {

@@ -12,6 +12,11 @@ router.post('/register', controller.post_new_organiser);
 router.get('/courses', controller.show_courses);
 router.get("/", controller.landing_page);
 
+router.get("/logout", (req, res) => {
+    res.clearCookie("jwt"); // removes the token
+    res.redirect("/"); // send back to home
+  });
+
 router.use(function(req, res) {
     res.status(404);
     res.type('text/plain');

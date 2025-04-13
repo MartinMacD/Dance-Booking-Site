@@ -4,11 +4,23 @@ const courseDAO = require("../models/courseModel");
 const courseDB = new courseDAO("courses.db");
 courseDB.init();
 
-exports.landing_page = function(req, res){
-    res.render("public/home", {
-      title: "Home"
-    });
-}
+exports.landing_page = function(req, res) {
+  let user = null;
+  if (req.cookies && req.cookies.jwt) {
+    try {
+      const jwt = require("jsonwebtoken");
+      const payload = jwt.verify(req.cookies.jwt, process.env.ACCESS_TOKEN_SECRET);
+      user = payload.username;
+    } catch (e) {
+      user = null; // If token is invalid or expired
+    }
+  }
+
+  res.render("public/home", {
+    title: "Home",
+    user: user
+  });
+};
 
 exports.show_register_page = function(req, res) {
     res.render("organiser/register");
@@ -38,18 +50,26 @@ exports.show_login = function (req, res) {
   };
 
 exports.handle_login = function (req, res) {
-    res.render("dashboard", {
-      title: "Dance class",
-      user: req.user
-    })
+  res.redirect("/dashboard")
   };
 
 exports.show_courses = function(req, res) {
+  let user = null;
+  if (req.cookies && req.cookies.jwt) {
+    try {
+      const jwt = require("jsonwebtoken");
+      const payload = jwt.verify(req.cookies.jwt, process.env.ACCESS_TOKEN_SECRET);
+      user = payload.username;
+    } catch (e) {
+      user = null; // If token is invalid or expired
+    }
+  }
   courseDB.getAllCourses()
   .then((list) => {
     console.log("Course list:", list);
     res.render("public/courses", {
       title: "All courses",
+      user: user,
       courses: list
     });
     console.log("promise succesful");
@@ -62,7 +82,8 @@ exports.show_courses = function(req, res) {
 exports.show_dashboard = function(req, res){
   res.render("organiser/dashboard", {
     title: "Dance Class",
-    user: req.user
+    user: req.user.username
   });
+  console.log("req.user is:", req.user);
 }
 
