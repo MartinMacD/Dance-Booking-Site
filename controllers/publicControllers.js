@@ -1,7 +1,13 @@
 const organiserDAO = require("../models/organiserModel");
+const courseDAO = require("../models/courseModel");
+
+const courseDB = new courseDAO("courses.db");
+courseDB.init();
 
 exports.landing_page = function(req, res){
-    res.render("public/home");
+    res.render("public/home", {
+      title: "Home"
+    });
 }
 
 exports.show_register_page = function(req, res) {
@@ -32,10 +38,31 @@ exports.show_login = function (req, res) {
   };
 
 exports.handle_login = function (req, res) {
-    // res.redirect("/new");
-    res.render("organiser/dashboard", {
-      title: "Dance Class",
-      user: "user"
-    });
+    res.render("dashboard", {
+      title: "Dance class",
+      user: req.user
+    })
   };
+
+exports.show_courses = function(req, res) {
+  courseDB.getAllCourses()
+  .then((list) => {
+    console.log("Course list:", list);
+    res.render("public/courses", {
+      title: "All courses",
+      courses: list
+    });
+    console.log("promise succesful");
+  })
+  .catch((err) => {
+    console.log("promise rejected", err);
+  });
+}
+
+exports.show_dashboard = function(req, res){
+  res.render("organiser/dashboard", {
+    title: "Dance Class",
+    user: req.user
+  });
+}
 

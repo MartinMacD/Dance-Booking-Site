@@ -39,6 +39,7 @@ exports.login = function (req, res,next) {
     let payload;
     try {
       payload = jwt.verify(accessToken, process.env.ACCESS_TOKEN_SECRET);
+      req.user = payload;
       next();
     } catch (e) {
       //if an error occured return request unauthorized error

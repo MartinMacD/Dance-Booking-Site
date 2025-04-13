@@ -5,6 +5,9 @@
 <body class="container">
 <h2>Dashboard</h2>
 <div class="text-right" style="margin-bottom: 1em;">
+<a href="/" class="btn btn-primary">
+Home
+</a>
 {{^user}}
   <a id="login" href="/register" class="btn btn-primary">
     Register
@@ -20,4 +23,3 @@
   </a>
 {{/user}}
 </div>
-<form method="post" role="form" action="/new">
