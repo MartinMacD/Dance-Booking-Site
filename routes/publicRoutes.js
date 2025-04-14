@@ -11,6 +11,9 @@ router.get('/register', controller.show_register_page);
 router.post('/register', controller.post_new_organiser);
 router.get('/courses', controller.show_courses_with_classes);
 router.get('/classes', controller.show_classes);
+
+router.get('/newclass', verify, controller.show_new_class_form);
+router.post('/newclass', verify, controller.create_new_class);
 router.get("/", controller.landing_page);
 
 router.get("/logout", (req, res) => {

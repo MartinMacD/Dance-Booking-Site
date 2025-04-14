@@ -126,5 +126,26 @@ exports.show_courses_with_classes = function(req, res) {
     });
 };
 
+exports.create_new_class = function (req, res) {
+  console.log("processing create_new_class controller");
+  try{
+    classDB.addClass(req.body.classID, req.body.courseID, req.body.name, req.body.date, req.body.time, req.body.description, req.body.location, req.body.price);
+    res.redirect("/classes");
+  }
+ catch (err) {
+  console.error("Error creating new class:", err);
+    res.status(500).send("Error creating new class");
+}
+  
+  
+};
+
+exports.show_new_class_form = function (req, res) {
+  const user = getUserFromToken(req);
+  res.render('organiser/newclass', {
+    title: 'Create New Class',
+    user: user
+  });
+};
 
 

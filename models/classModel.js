@@ -9,9 +9,9 @@ class classDAO {
             console.log("Database file not found, running init");
             // Create the Datastore instance if file doesn't exist
             this.db = new Datastore({ filename: dbFilePath, autoload: true });
-            this.init(); // Initialize the database if file doesn't exist
+            this.init(); // Initialise the database if file doesn't exist
         } else {
-            // File exists or no dbFilePath is  provided
+            // File exists or no dbFilePath is provided
             this.db = new Datastore({ filename: dbFilePath, autoload: true });
             console.log("DB connected to " + dbFilePath);
         }

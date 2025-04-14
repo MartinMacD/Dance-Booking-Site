@@ -1,0 +1,65 @@
+<html lang="en">
+<head>
+{{>header}}
+</head>
+<body class="container">
+<h1>{{title}}</h1>
+<div class="text-right" style="margin-bottom: 1em;">
+<a href="/" class="btn btn-primary">
+Home
+</a>
+</div>
+<form method="post" role="form" action="/newclass">
+<div class="form-group">
+<label for="classID">Class ID</label>
+<input type="text" class="form-control" id="classID"
+name="classID" placeholder="Enter class ID"
+required>
+</div>
+<div class="form-group">
+<label for="courseID">courseID</label>
+<input type="text" class="form-control" id="courseID"
+name="courseID" placeholder="Enter course ID (leave blank if not associated with a course)"
+required>
+</div>
+<div class="form-group">
+<label for="name">name</label>
+<input type="text" class="form-control" id="name"
+name="name" placeholder="Enter name of class"
+required>
+</div>
+<div class="form-group">
+<label for="date">date</label>
+<input type="text" class="form-control" id="date"
+name="date" placeholder="Enter date"
+required>
+</div>
+<div class="form-group">
+<label for="time">time</label>
+<input type="text" class="form-control" id="time"
+name="time" placeholder="Enter time"
+required>
+</div>
+<div class="form-group">
+<label for="description">description</label>
+<input type="text" class="form-control" id="description"
+name="description" placeholder="Enter description"
+required>
+</div>
+<div class="form-group">
+<label for="location">location</label>
+<input type="text" class="form-control" id="location"
+name="location" placeholder="Enter location"
+required>
+</div>
+<div class="form-group">
+<label for="price">price</label>
+<input type="text" class="form-control" id="price"
+name="price" placeholder="Enter price"
+required>
+</div>
+<div class="form-group">
+<input type="submit" value="Submit" class="btn btn-primary">
+</div>
+</form>
+</html>
