@@ -1,20 +1,12 @@
 const organiserDAO = require("../models/organiserModel");
 const courseDAO = require("../models/courseModel");
+const { getUserFromToken } = require("../utils/authHelpers");
 
 const courseDB = new courseDAO("courses.db");
 courseDB.init();
 
 exports.landing_page = function(req, res) {
-  let user = null;
-  if (req.cookies && req.cookies.jwt) {
-    try {
-      const jwt = require("jsonwebtoken");
-      const payload = jwt.verify(req.cookies.jwt, process.env.ACCESS_TOKEN_SECRET);
-      user = payload.username;
-    } catch (e) {
-      user = null; // If token is invalid or expired
-    }
-  }
+  const user = getUserFromToken(req);
 
   res.render("public/home", {
     title: "Home",
@@ -54,16 +46,8 @@ exports.handle_login = function (req, res) {
   };
 
 exports.show_courses = function(req, res) {
-  let user = null;
-  if (req.cookies && req.cookies.jwt) {
-    try {
-      const jwt = require("jsonwebtoken");
-      const payload = jwt.verify(req.cookies.jwt, process.env.ACCESS_TOKEN_SECRET);
-      user = payload.username;
-    } catch (e) {
-      user = null; // If token is invalid or expired
-    }
-  }
+  const user = getUserFromToken(req);
+  
   courseDB.getAllCourses()
   .then((list) => {
     console.log("Course list:", list);
