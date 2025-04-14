@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  {{>header}}
+</head>
+<body>
+
+  <div class="container mt-4">
+    <h1 class="text-center">{{title}}</h1>
+
+    <div class="list-group">
+      {{#courses}}
+        <div class="list-group-item">
+          <h5 class="d-flex justify-content-between align-items-center">
+            <span class="course-header" onclick="toggleClasses('{{courseID}}')">
+              ▶ {{name}} ({{duration}})
+            </span>
+          </h5>
+          <ul id="classes-{{courseID}}" class="hidden list-group mt-3">
+            {{#classes}}
+              <li class="list-group-item">
+                <h6><strong>{{name}}</strong></h6>
+                <p><strong>Date:</strong> {{date}} at {{time}}</p>
+                <p><strong>Location:</strong> {{location}}</p>
+                <p><strong>Price:</strong> {{price}}</p>
+                <p><strong>Description:</strong> {{description}}</p>
+              </li>
+            {{/classes}}
+            {{^classes}}
+              <li class="list-group-item text-muted">No classes scheduled</li>
+            {{/classes}}
+          </ul>
+        </div>
+      {{/courses}}
+    </div>
+  </div>
+
+  <script>
+    function toggleClasses(courseID) {
+      const list = document.getElementById("classes-" + courseID);
+      list.classList.toggle("hidden");
+    }
+  </script>
+
+  <style>
+    .hidden {
+      display: none;
+    }
+
+    .course-header {
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .course-header:hover {
+      text-decoration: underline;
+    }
+
+    .class-list {
+      margin-left: 20px;
+    }
+  </style>
+
+</body>
+</html>

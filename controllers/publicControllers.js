@@ -1,9 +1,12 @@
 const organiserDAO = require("../models/organiserModel");
 const courseDAO = require("../models/courseModel");
+const classDAO = require("../models/classModel")
 const { getUserFromToken } = require("../utils/authHelpers");
 
 const courseDB = new courseDAO("courses.db");
-courseDB.init();
+
+const classDB = new classDAO("classes.db");
+
 
 exports.landing_page = function(req, res) {
   const user = getUserFromToken(req);
@@ -47,7 +50,7 @@ exports.handle_login = function (req, res) {
 
 exports.show_courses = function(req, res) {
   const user = getUserFromToken(req);
-  
+
   courseDB.getAllCourses()
   .then((list) => {
     console.log("Course list:", list);
@@ -63,6 +66,24 @@ exports.show_courses = function(req, res) {
   });
 }
 
+exports.show_classes = function(req, res) {
+  const user = getUserFromToken(req);
+
+  classDB.getAllClasses()
+    .then((list) => {
+      console.log("Class list:", list);
+      res.render("public/classes", {
+        title: "All Classes",
+        user: user,
+        classes: list
+      });
+      console.log("Promise successful");
+    })
+    .catch((err) => {
+      console.log("Promise rejected", err);
+    });
+};
+
 exports.show_dashboard = function(req, res){
   res.render("organiser/dashboard", {
     title: "Dance Class",
@@ -70,4 +91,40 @@ exports.show_dashboard = function(req, res){
   });
   console.log("req.user is:", req.user);
 }
+
+exports.show_courses_with_classes = function(req, res) {
+  courseDB.getAllCourses()
+    .then((courses) => {
+      console.log("Courses fetched:", courses);
+      
+      const coursePromises = courses.map((course) => {
+        console.log("Fetching classes for courseId:", course.courseID); 
+        
+        return classDB.getClassesByCourseId(course.courseID) 
+          .then((classes) => {
+            return { ...course, classes };
+          });
+      });
+
+      Promise.all(coursePromises)
+        .then((coursesWithClasses) => {
+          console.log("Courses with classes:", coursesWithClasses); // Log final result
+          
+          res.render("public/courseswithclasses", {
+            title: "Courses & Classes",
+            courses: coursesWithClasses
+          });
+        })
+        .catch((err) => {
+          console.error("Error fetching classes", err);
+          res.status(500).send("Internal server error");
+        });
+    })
+    .catch((err) => {
+      console.error("Error fetching courses", err);
+      res.status(500).send("Internal server error");
+    });
+};
+
+
 

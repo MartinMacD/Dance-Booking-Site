@@ -9,12 +9,13 @@ router.post('/login', login, controller.handle_login);
 router.get('/dashboard', verify, controller.show_dashboard)
 router.get('/register', controller.show_register_page); 
 router.post('/register', controller.post_new_organiser);
-router.get('/courses', controller.show_courses);
+router.get('/courses', controller.show_courses_with_classes);
+router.get('/classes', controller.show_classes);
 router.get("/", controller.landing_page);
 
 router.get("/logout", (req, res) => {
-    res.clearCookie("jwt"); // removes the token
-    res.redirect("/"); // send back to home
+    res.clearCookie("jwt"); 
+    res.redirect("/"); 
   });
 
 router.use(function(req, res) {

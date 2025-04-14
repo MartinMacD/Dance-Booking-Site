@@ -1,18 +1,22 @@
 const Datastore = require("gray-nedb");
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
+const fs = require('fs');
 
 class organiserDAO{
     constructor(dbFilePath) {
-        if (dbFilePath) {
-            //embedded
-            this.db = new Datastore({ filename: dbFilePath,
-            autoload: true });
+        if (dbFilePath && !fs.existsSync(dbFilePath)) {
+            // Check if the database file exists before creating datastore
+            console.log("Database file not found, running init...");
+            this.db = new Datastore({ filename: dbFilePath, autoload: true });
+            this.init(); // Initialise the database if file doesn't exist
         } else {
-            //in memory
-            this.db = new Datastore();
+            // File exists or no dbFilePath is provided
+            this.db = new Datastore({ filename: dbFilePath, autoload: true });
+            console.log("DB connected to " + dbFilePath);
         }
     }
+
     init(){
         this.db.insert({
             username: 'admin',
@@ -49,6 +53,5 @@ class organiserDAO{
 }
 
 const dao = new organiserDAO("organisers.db");
-dao.init();
 
 module.exports = dao;

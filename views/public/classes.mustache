@@ -1,0 +1,49 @@
+<html><head>
+{{>header}}
+</head>
+<body>
+<h1>{{title}}</h1>
+<div class="text-left" style="margin-bottom: 1em;">
+<a href="/" class="btn btn-primary">
+Home
+</a>
+{{^user}}
+  <a id="login" href="/login" class="btn btn-primary">
+    Sign in
+  </a>
+  <a id="register" href="/register" class="btn btn-primary">
+ Register
+ </a>
+{{/user}}
+{{#user}}
+  <a id="logout" href="/logout" class="btn btn-primary">
+    Sign out
+  </a>
+{{/user}}
+
+{{#classes}}
+  <div class="card mb-3">
+    <div class="card-body">
+      <h4 class="card-title">{{name}}</h4>
+
+      {{#user}}
+        <p class="card-text">Class ID: {{classID}}</p>
+        <p class="card-text">Course ID: {{courseID}}</p>
+      {{/user}}
+      <p class="card-text">Date: {{date}}</p>
+      <p class="card-text">Time: {{time}}</p>
+      <p class="card-text">Description: {{description}}</p>
+      <p class="card-text">Location: {{location}}</p>
+      <p class="card-text">Price: {{price}}</p>
+
+      
+    </div>
+  </div>
+{{/classes}}
+
+{{^classes}}
+  <p>No classes yet.</p>
+{{/classes}}
+</div>
+</body>
+</html>

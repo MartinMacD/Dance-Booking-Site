@@ -1,27 +1,39 @@
 const Datastore = require("gray-nedb");
+//Used by node to read the filesystem
+const fs = require("fs");
+
 class courseDAO {
     constructor(dbFilePath) {
-        if (dbFilePath) {
-            //embedded
+        // Check if the database file exists before creating datastore
+        if (dbFilePath && !fs.existsSync(dbFilePath)) {
+            console.log("Database file not found, running init");
+            // Create the Datastore instance if file doesn't exist
             this.db = new Datastore({ filename: dbFilePath, autoload: true });
-            console.log('DB connected to ' + dbFilePath);
+            this.init(); // Initialise the database if file doesn't exist
         } else {
-            //in memory
-            this.db = new Datastore();
+            // File exists or no dbFilePath is provided
+            this.db = new Datastore({ filename: dbFilePath, autoload: true });
+            console.log("DB connected to " + dbFilePath);
         }
     }
 
     init(){
         this.db.insert({
-            id: '001',
-            name: 'Dance class',
+            courseID: 'co001',
+            name: 'Dance course',
             duration: '2 weeks'
         })
-        console.log('db inserted dance class');
+        this.db.insert({
+            courseID: 'co002',
+            name: 'Dance course 2',
+            duration: '3 weeks'
+        })
+        console.log('db inserted dance course');
     }
-    addCourse(id, name, duration) {
+
+    addCourse(courseID, name, duration) {
         var course = {
-            id: id,
+            courseID: courseID,
             name: name,
             duration: duration
         }
@@ -37,8 +49,6 @@ class courseDAO {
 
     getAllCourses() {
         return new Promise((resolve, reject) => {
-            //use the find() function of the database to get the data,
-            //error first callback function, err for error, entries for data
             this.db.find({}, function (err, courses) {
                 //if error occurs reject Promise
                 if (err) {
@@ -47,7 +57,7 @@ class courseDAO {
                 } else {
                     resolve(courses);
                     //to see what the returned data looks like
-                    console.log('function all() returns: ', courses);
+                    console.log('function getallcourses returns: ', courses);
                 }
             })
         })
