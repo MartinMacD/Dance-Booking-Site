@@ -40,7 +40,11 @@ Home
       <p class="card-text">Location: {{location}}</p>
       <p class="card-text">Price: {{price}}</p>
 
-      
+      {{#user}}
+        <form method="POST" action="/class/delete/{{classID}}" style="display:inline;">
+        <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+        </form>
+      {{/user}}
     </div>
   </div>
 {{/classes}}

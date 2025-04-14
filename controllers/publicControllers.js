@@ -136,8 +136,6 @@ exports.create_new_class = function (req, res) {
   console.error("Error creating new class:", err);
     res.status(500).send("Error creating new class");
 }
-  
-  
 };
 
 exports.show_new_class_form = function (req, res) {
@@ -146,6 +144,18 @@ exports.show_new_class_form = function (req, res) {
     title: 'Create New Class',
     user: user
   });
+};
+
+exports.delete_class = function (req, res) {
+  const classID = req.params.classID;
+  classDB.deleteClass(classID)
+    .then(() => {
+      res.redirect("/classes");
+    })
+    .catch((err) => {
+      console.log("Error deleting class:", err);
+      res.status(500).send("Error deleting class");
+    });
 };
 
 

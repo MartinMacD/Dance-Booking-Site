@@ -38,7 +38,7 @@ class classDAO {
             location: 'Glasgow',
             price: '£5'
         })
-        console.log('db inserted dance class');
+        console.log("db inserted dance class");
     }
 
     addClass(classID, courseID, name, date, time, description, location, price) {
@@ -56,9 +56,9 @@ class classDAO {
         console.log('Class created', classHolder);
         this.db.insert(classHolder, function (err, doc) {
             if (err) {
-                console.log('Error inserting document', name);
+                console.log("Error inserting document", name);
             } else {
-                console.log('document inserted into the database', doc);
+                console.log("document inserted into the database", doc);
             }
         })
     }
@@ -73,7 +73,7 @@ class classDAO {
                 } else {
                     resolve(classes);
                     //to see what the returned data looks like
-                    console.log('function getAllClasses returns: ', classes);
+                    console.log("function getAllClasses returns: ", classes);
                 }
             })
         })
@@ -106,6 +106,19 @@ class classDAO {
             });
         });
     }
+
+    deleteClass(classID) {
+        return new Promise((resolve, reject) => {
+          this.db.remove({ classID: classID }, {}, function (err, numRemoved) {
+            if (err) {
+              reject(err);
+            } else {
+              console.log("Class with classID ${classID} deleted");
+              resolve(numRemoved);
+            }
+          });
+        });
+      }
     
 }
 module.exports = classDAO;
