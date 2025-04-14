@@ -76,6 +76,18 @@ class courseDAO {
         })
     }
 
-}
+    deleteCourse(courseID) {
+        return new Promise((resolve, reject) => {
+          this.db.remove({ courseID: courseID }, {}, (err, numRemoved) => {
+            if (err) {
+              reject(err);
+            } else {
+              console.log(`Deleted ${numRemoved} course(s) with courseID ${courseID}`);
+              resolve(numRemoved); 
+            }
+          });
+        });
+      }
+    }
 
 module.exports = courseDAO;

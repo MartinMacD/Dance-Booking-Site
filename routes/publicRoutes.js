@@ -14,6 +14,7 @@ router.get('/classes', controller.show_classes);
 router.get('/newclass', verify, controller.show_new_class_form);
 router.post('/newclass', verify, controller.create_new_class);
 router.post("/class/delete/:classID", verify, controller.delete_class);
+router.post('/courses/delete/:courseID', verify, controller.delete_course);
 router.get("/", controller.landing_page);
 
 router.get("/logout", (req, res) => {

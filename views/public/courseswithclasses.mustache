@@ -4,7 +4,9 @@
   {{>header}}
 </head>
 <body>
-
+<a href="/" class="btn btn-primary">
+Home
+</a>
   <div class="container mt-4">
     <h1 class="text-center">{{title}}</h1>
 
@@ -15,6 +17,9 @@
             <span class="course-header" onclick="toggleClasses('{{courseID}}')">
               ▶ {{name}} ({{duration}})
             </span>
+            <form method="POST" action="/courses/delete/{{courseID}}" style="display: inline;">
+              <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+            </form>
           </h5>
           <ul id="classes-{{courseID}}" class="hidden list-group mt-3">
             {{#classes}}

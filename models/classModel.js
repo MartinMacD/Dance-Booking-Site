@@ -113,7 +113,20 @@ class classDAO {
             if (err) {
               reject(err);
             } else {
-              console.log("Class with classID ${classID} deleted");
+                console.log(`Class with classID ${classID} deleted`);
+              resolve(numRemoved);
+            }
+          });
+        });
+      }
+
+      deleteClassesByCourseId(courseID) {
+        return new Promise((resolve, reject) => {
+          this.db.remove({ courseID: courseID }, { multi: true }, (err, numRemoved) => {
+            if (err) {
+              reject(err);
+            } else {
+              console.log(`Deleted ${numRemoved} classes for course ${courseID}`);
               resolve(numRemoved);
             }
           });

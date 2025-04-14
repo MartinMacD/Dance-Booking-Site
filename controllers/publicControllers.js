@@ -158,4 +158,29 @@ exports.delete_class = function (req, res) {
     });
 };
 
+exports.delete_course = function(req, res) {
+  const courseID = req.params.courseID;
+
+  // First, delete all classes associated with this course
+  classDB.deleteClassesByCourseId(courseID)
+    .then(() => {
+      // Now, delete the course itself
+      courseDB.deleteCourse(courseID)
+        .then(() => {
+          
+          res.redirect("/courses");
+        })
+        .catch((err) => {
+          console.error("Error deleting course:", err);
+          res.status(500).send("Error deleting course");
+        });
+    })
+    .catch((err) => {
+      console.log("Error deleting classes:", err);
+      res.status(500).send("Error deleting associated classes");
+    });
+};
+
+
+
 
