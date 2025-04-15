@@ -13,7 +13,7 @@ exports.login = function (req, res,next) {
       }
       if (!organiser) {
         console.log("organiser ", username, " not found");
-        return res.render("public/home");
+        return res.render("organiser/login", { loginFailed: true });
       }
       //compare provided password with stored password
       bcrypt.compare(password, organiser.password, function (err, result) {
@@ -26,7 +26,7 @@ exports.login = function (req, res,next) {
           console.log("JWT cookie set:", accessToken);
           next();
         } else {
-          return res.render("organiser/login"); //res.status(403).send();
+          return res.render("organiser/login", { loginFailed: true }); //res.status(403).send();
         }
       });
     });

@@ -1,28 +1,61 @@
 <html><head>
 {{>header}}
 </head>
-<body>
-<h1>{{title}}</h1>
-<div class="text-left" style="margin-bottom: 1em;">
-<a href="/courses" class="btn btn-primary">
-View courses
-</a>
-<a href="/classes" class="btn btn-primary">
-View classes
-</a>
-{{^user}}
-  <a id="login" href="/login" class="btn btn-primary">
-    Sign in
-  </a>
-  <a id="login" href="/register" class="btn btn-primary">
- Register
- </a>
-{{/user}}
-{{#user}}
-  <a id="logout" href="/logout" class="btn btn-primary">
-    Sign out
-  </a>
-  <a href="/dashboard" class="btn btn-primary">Dashboard</a>
-{{/user}}
 
-</div>
+<nav class="navbar navbar-expand-lg bg-body-tertiary" style="background-color: rgb(255, 255, 255);">
+  <div class="container-fluid">
+
+    <div class="collapse navbar-collapse ms-auto" id="navbarNavAltMarkup">
+      <ul class="nav nav-underline">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="/">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/courses">Courses</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/classes">Classes</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/login">Sign In</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/register">Register</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<a id="home" href="/" class="btn btn-primary">
+ Home
+ </a>
+ <a id="courses" href="/courses" class="btn btn-primary">
+ Courses
+ </a>
+ <a id="classes" href="/classes" class="btn btn-primary">
+ Classes
+ </a>
+
+
+
+<body>
+  <div class="d-flex justify-content-end">
+    {{^user}}
+      <a id="login" href="/login" class="btn btn-primary">
+        Sign in
+      </a>
+      <a id="register" href="/register" class="btn btn-primary">
+        Register
+      </a>
+    {{/user}}
+    {{#user}}
+      <a id="logout" href="/logout" class="btn btn-primary">
+        Sign out
+      </a>
+      <a href="/dashboard" class="btn btn-primary">Dashboard</a>
+    {{/user}}
+  </div>
+</body>
+
+

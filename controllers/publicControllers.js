@@ -333,4 +333,28 @@ exports.show_all_participants = function (req, res) {
   });
 };
 
+exports.show_new_organiser_form = function (req, res) {
+  res.render("organiser/neworganiser", { title: "Add New Organiser" });
+};
+
+exports.create_new_organiser_form = function (req, res) {
+        const user = req.body.username;
+        const password = req.body.pass;
+      
+        if (!user || !password) {
+          res.send(401, "no user or no password");
+          return;
+        }
+        organiserDAO.lookup(user, function (err, u) {
+          if (u) {
+            res.send(401, "User exists:", user);
+            return;
+          }
+          organiserDAO.create(user, password);
+          console.log("register user", user, "password", password);
+          res.redirect("/dashboard");
+        });
+      };
+
+
 

@@ -2,6 +2,15 @@
 <head>
     {{>header}}
 </head>
+{{#loginFailed}}
+  <div class="alert alert-danger" role="alert">
+    Incorrect username or password. Please try again.
+  </div>
+{{/loginFailed}}
+<a href="/" class="btn btn-primary">
+Home
+</a>
+
 <body class="container">
     <h1>{{title}}</h1>
     <h2>Sign In</h2>
