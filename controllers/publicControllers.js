@@ -93,6 +93,8 @@ exports.show_dashboard = function(req, res){
 }
 
 exports.show_courses_with_classes = function(req, res) {
+  const user = getUserFromToken(req)
+
   courseDB.getAllCourses()
     .then((courses) => {
       console.log("Courses fetched:", courses);
@@ -112,6 +114,7 @@ exports.show_courses_with_classes = function(req, res) {
           
           res.render("public/courseswithclasses", {
             title: "Courses & Classes",
+            user: user,
             courses: coursesWithClasses
           });
         })
