@@ -1,6 +1,7 @@
 <head>
   {{>header}}
 </head>
+<h1 class="text-center">{{title}}</h1>
 <body>
 <a href="/" class="btn btn-primary">
 Home
@@ -14,7 +15,7 @@ Add new class
 </a>
 {{/user}}
   <div class="container mt-4">
-    <h1 class="text-center">{{title}}</h1>
+    
 
     <div class="list-group">
       {{#courses}}
@@ -23,13 +24,18 @@ Add new class
             <span class="course-header" onclick="toggleClasses('{{courseID}}')">
               ▶ {{name}} ({{duration}})
             </span>
-            {{#user}}
-            <form method="POST" action="/courses/delete/{{courseID}}" style="display: inline;">
-              <button type="submit" class="btn btn-danger btn-sm">Delete</button>
-            </form>
-            {{/user}}
-            <a href="/enrol/course/{{courseID}}" class="btn btn-primary btn-sm">Enrol in Course</a>
           </h5>
+          {{#user}}
+            <a href="/participants/course/{{courseID}}" class="btn btn-info">View Participants</a>
+            <form method="POST" action="/courses/delete/{{courseID}}" style="display: inline;">
+            <button type="submit" class="btn btn-danger">Delete</button>
+            </form>
+        {{/user}}
+
+        {{^user}}
+            <a href="/enrol/course/{{courseID}}" class="btn btn-primary">Enrol in Course</a>
+        {{/user}}
+
           <ul id="classes-{{courseID}}" class="hidden list-group mt-3">
             {{#classes}}
             <li class="list-group-item">
@@ -41,22 +47,26 @@ Add new class
                   <p><strong>Price:</strong> {{price}}</p>
                   <p><strong>Description:</strong> {{description}}</p>
                 </div>
-                <a href="/enrol/class/{{classID}}" class="btn btn-primary btn-sm">Enrol in Class</a>
-
-                {{#user}}
-                <a href="/editclass/{{classID}}" class="btn btn-secondary btn-sm">Edit</a>
-                <form action="/class/delete/{{classID}}" method="POST">
-                  <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                
+                
+              </div>
+              {{^user}}
+                <a href="/enrol/class/{{classID}}" class="btn btn-primary">Enrol in Class</a>
+                {{/user}}
+              {{#user}}
+                <a href="/participants/class/{{classID}}" class="btn btn-info">View Participants</a>
+                <a href="/editclass/{{classID}}" class="btn btn-secondary">Edit</a>
+                <form action="/class/delete/{{classID}}" method="POST" style="display:inline;">
+                  <button type="submit" class="btn btn-danger">Delete</button>
                 </form>
                 {{/user}}
-              </div>
             </li>
           {{/classes}}
             {{^classes}}
               <li class="list-group-item text-muted">No classes scheduled</li>
             {{/classes}}
           </ul>
-        </div>
+        </div> 
       {{/courses}}
     </div>
   </div>
@@ -85,6 +95,8 @@ Add new class
     .class-list {
       margin-left: 20px;
     }
+
+    
   </style>
 
 </body>

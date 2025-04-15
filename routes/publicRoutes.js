@@ -23,6 +23,9 @@ router.get("/enrol/class/:classID", controller.show_class_enrolment_form);
 router.get("/enrol/course/:courseID", controller.show_course_enrolment_form);
 router.post("/enrol", controller.submit_enrolment);
 router.get("/enrolled", controller.show_enrolled_page);
+router.get("/participants/class/:classID", verify, controller.show_class_participants);
+router.get("/participants/course/:courseID", verify, controller.show_course_participants);
+router.get("/participants/all", verify, controller.show_all_participants);
 router.get("/", controller.landing_page);
 
 router.get("/logout", (req, res) => {

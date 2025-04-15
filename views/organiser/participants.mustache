@@ -1,0 +1,30 @@
+<head>
+  {{> header }}
+</head>
+<body>
+  <h1>{{title}}</h1>
+  <a href="/" class="btn btn-primary mb-3">Home</a>
+  <a href="/dashboard" class="btn btn-primary mb-3">Dashboard</a>
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Enrolled On</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#participants}}
+        <tr>
+          <td>{{name}}</td>
+          <td>{{email}}</td>
+          <td>{{dateEnrolled}}</td>
+        </tr>
+      {{/participants}}
+      {{^participants}}
+        <tr><td colspan="3">No participants enrolled yet.</td></tr>
+      {{/participants}}
+    </tbody>
+  </table>
+</body>

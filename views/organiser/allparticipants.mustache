@@ -1,0 +1,39 @@
+<head>
+  {{> header }}
+</head>
+<body>
+  <div class="container mt-4">
+    <h1>{{title}}</h1>
+    <a href="/" class="btn btn-primary mb-3">Home</a>
+    <a href="/dashboard" class="btn btn-primary mb-3">Dashboard</a>
+
+    {{#enrolments.length}}
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Class ID</th>
+            <th>Course ID</th>
+            <th>Date Enrolled</th>
+          </tr>
+        </thead>
+        <tbody>
+          {{#enrolments}}
+            <tr>
+              <td>{{name}}</td>
+              <td>{{email}}</td>
+              <td>{{classID}}</td>
+              <td>{{courseID}}</td>
+              <td>{{dateEnrolled}}</td>
+            </tr>
+          {{/enrolments}}
+        </tbody>
+      </table>
+    {{/enrolments.length}}
+
+    {{^enrolments.length}}
+      <p>No enrolments found.</p>
+    {{/enrolments.length}}
+  </div>
+</body>

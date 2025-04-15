@@ -280,3 +280,57 @@ exports.show_enrolled_page = (req, res) => {
   res.render("public/enrolled");
 }
 
+exports.show_class_participants = (req, res) => {
+  const classID = req.params.classID;
+
+  enrolmentDB.getEnrolmentsByClassID(classID)
+    .then((enrolments) => {
+      res.render("organiser/participants", {
+        title: "Class Participants",
+        participants: enrolments
+      });
+    })
+    .catch((err) => {
+      console.error("Error fetching class enrolments:", err);
+      res.status(500).send("Internal server error");
+    });
+};
+
+exports.show_course_participants = (req, res) => {
+  const courseID = req.params.courseID;
+
+  enrolmentDB.getEnrolmentsByCourseID(courseID)
+    .then((enrolments) => {
+      res.render("organiser/participants", {
+        title: "Course Participants",
+        participants: enrolments
+      });
+    })
+    .catch((err) => {
+      console.error("Error fetching course enrolments:", err);
+      res.status(500).send("Internal server error");
+    });
+};
+
+exports.show_all_participants = function (req, res) {
+  const user = getUserFromToken(req);
+
+  if (!user) {
+    return res.status(403).send("Access denied");
+  }
+
+  enrolmentDB.db.find({}, (err, enrolments) => {
+    if (err) {
+      console.error("Error retrieving enrolments:", err);
+      return res.status(500).send("Internal server error");
+    }
+
+    res.render("organiser/allparticipants", {
+      title: "All Enrolments",
+      user: user,
+      enrolments: enrolments
+    });
+  });
+};
+
+
