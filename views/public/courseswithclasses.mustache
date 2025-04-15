@@ -7,6 +7,14 @@
 <a href="/" class="btn btn-primary">
 Home
 </a>
+{{#user}}
+<a href="/newcourse" class="btn btn-primary">
+Add new course
+</a>
+<a href="/newclass" class="btn btn-primary">
+Add new class
+</a>
+{{/user}}
   <div class="container mt-4">
     <h1 class="text-center">{{title}}</h1>
 
@@ -25,14 +33,23 @@ Home
           </h5>
           <ul id="classes-{{courseID}}" class="hidden list-group mt-3">
             {{#classes}}
-              <li class="list-group-item">
-                <h6><strong>{{name}}</strong></h6>
-                <p><strong>Date:</strong> {{date}} at {{time}}</p>
-                <p><strong>Location:</strong> {{location}}</p>
-                <p><strong>Price:</strong> {{price}}</p>
-                <p><strong>Description:</strong> {{description}}</p>
-              </li>
-            {{/classes}}
+            <li class="list-group-item">
+              <div class="d-flex justify-content-between align-items-start">
+                <div>
+                  <h6><strong>{{name}}</strong></h6>
+                  <p><strong>Date:</strong> {{date}} at {{time}}</p>
+                  <p><strong>Location:</strong> {{location}}</p>
+                  <p><strong>Price:</strong> {{price}}</p>
+                  <p><strong>Description:</strong> {{description}}</p>
+                </div>
+                {{#user}}
+                <form action="/class/delete/{{classID}}" method="POST">
+                  <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                </form>
+                {{/user}}
+              </div>
+            </li>
+          {{/classes}}
             {{^classes}}
               <li class="list-group-item text-muted">No classes scheduled</li>
             {{/classes}}

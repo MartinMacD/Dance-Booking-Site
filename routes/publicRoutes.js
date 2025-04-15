@@ -13,6 +13,8 @@ router.get('/courses', controller.show_courses_with_classes);
 router.get('/classes', controller.show_classes);
 router.get('/newclass', verify, controller.show_new_class_form);
 router.post('/newclass', verify, controller.create_new_class);
+router.get("/newcourse", verify, controller.show_new_course_form);
+router.post("/newcourse", verify, controller.create_new_course);
 router.post("/class/delete/:classID", verify, controller.delete_class);
 router.post('/courses/delete/:courseID', verify, controller.delete_course);
 router.get("/", controller.landing_page);

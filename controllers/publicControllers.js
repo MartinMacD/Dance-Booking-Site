@@ -113,7 +113,7 @@ exports.show_courses_with_classes = function(req, res) {
           console.log("Courses with classes:", coursesWithClasses); // Log final result
           
           res.render("public/courseswithclasses", {
-            title: "Courses & Classes",
+            title: "Courses",
             user: user,
             courses: coursesWithClasses
           });
@@ -153,7 +153,8 @@ exports.delete_class = function (req, res) {
   const classID = req.params.classID;
   classDB.deleteClass(classID)
     .then(() => {
-      res.redirect("/classes");
+      const referer = req.get('Referer'); // Gets previous page
+      res.redirect(referer || "/classes"); 
     })
     .catch((err) => {
       console.log("Error deleting class:", err);
@@ -184,6 +185,25 @@ exports.delete_course = function(req, res) {
     });
 };
 
+exports.show_new_course_form = function (req, res) {
+  const user = getUserFromToken(req);
+  res.render("organiser/newcourse", {
+    title: "Create New Course",
+    user: user
+  });
+};
+
+exports.create_new_course = function (req, res) {
+  console.log("Processing create_new_course");
+
+  try {
+    courseDB.addCourse( req.body.courseID, req.body.name, req.body.duration, req.body.description);
+    res.redirect("/courses");
+  } catch (err) {
+    console.error("Error creating new course:", err);
+    res.status(500).send("Error creating new course");
+  }
+};
 
 
 
