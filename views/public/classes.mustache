@@ -2,27 +2,32 @@
 {{>header}}
 </head>
 <body>
-<h1>{{title}}</h1>
-<div class="text-left" style="margin-bottom: 1em;">
-<a href="/" class="btn btn-primary">
-Home
-</a>
-{{^user}}
-  <a id="login" href="/login" class="btn btn-primary">
-    Sign in
-  </a>
-  <a id="register" href="/register" class="btn btn-primary">
- Register
- </a>
-{{/user}}
-{{#user}}
-  <a id="logout" href="/logout" class="btn btn-primary">
-    Sign out
-  </a>
-  <a href="/newclass" class="btn btn-primary">
-    Add new class
-  </a>
-{{/user}}
+<div class="d-flex justify-content-between align-items-center p-2" style="background-color: #007BFF;">
+    <div class="d-flex gap-2">
+      <a id="home" href="/" class="btn btn-primary rounded-0">Home</a>
+      <a id="courses" href="/courses" class="btn btn-primary rounded-0">Courses</a>
+      <a id="classes" href="/classes" class="btn btn-primary rounded-0">Classes</a>
+    </div>
+
+    <div class="d-flex justify-content-center align-items-center flex-grow-1">
+    <span class="text-white font-weight-bold">Glasgow Dance Studio</span>
+    </div>
+
+    <div class="d-flex gap-2">
+      {{^user}}
+        <a id="login" href="/login" class="btn btn-primary rounded-0">Sign in</a>
+        <a id="register" href="/register" class="btn btn-primary rounded-0">Register</a>
+      {{/user}}
+      {{#user}}
+        <a id="logout" href="/logout" class="btn btn-primary rounded-0">Sign out</a>
+        <a href="/dashboard" class="btn btn-primary rounded-0">Dashboard</a>
+      {{/user}}
+    </div>
+
+  </div>
+  <div class="d-flex justify-content-center align-items-center flex-grow-1">
+  <h1>{{title}}</h1>
+  </div>
 
 
 {{#classes}}

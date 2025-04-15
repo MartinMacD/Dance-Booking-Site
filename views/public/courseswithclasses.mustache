@@ -1,22 +1,36 @@
 <head>
   {{>header}}
 </head>
-<h1 class="text-center">{{title}}</h1>
 <body>
-<a href="/" class="btn btn-primary">
-Home
-</a>
-{{#user}}
-<a href="/newcourse" class="btn btn-primary">
-Add new course
-</a>
-<a href="/newclass" class="btn btn-primary">
-Add new class
-</a>
-{{/user}}
-  <div class="container mt-4">
-    
+ <div class="d-flex justify-content-between align-items-center p-2" style="background-color: #007BFF;">
+    <!-- Left side: Main navigation -->
+    <div class="d-flex gap-2">
+      <a id="home" href="/" class="btn btn-primary rounded-0">Home</a>
+      <a id="courses" href="/courses" class="btn btn-primary rounded-0">Courses</a>
+      <a id="classes" href="/classes" class="btn btn-primary rounded-0">Classes</a>
+    </div>
 
+    <div class="d-flex justify-content-center align-items-center flex-grow-1">
+    <span class="text-white font-weight-bold">Glasgow Dance Studio</span>
+    </div>
+
+    <!-- Right side: User authentication -->
+    <div class="d-flex gap-2">
+      {{^user}}
+        <a id="login" href="/login" class="btn btn-primary rounded-0">Sign in</a>
+        <a id="register" href="/register" class="btn btn-primary rounded-0">Register</a>
+      {{/user}}
+      {{#user}}
+        <a id="logout" href="/logout" class="btn btn-primary rounded-0">Sign out</a>
+        <a href="/dashboard" class="btn btn-primary rounded-0">Dashboard</a>
+      {{/user}}
+    </div>
+  </div>
+  <div class="d-flex justify-content-center align-items-center flex-grow-1">
+  <h1>{{title}}</h1>
+  </div>
+
+  <div class="container mt-4">
     <div class="list-group">
       {{#courses}}
         <div class="list-group-item">

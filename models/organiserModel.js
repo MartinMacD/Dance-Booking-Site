@@ -50,7 +50,37 @@ class organiserDAO{
             }
         });
     }
+    getAllOrganisers() {
+        return new Promise((resolve, reject) => {
+            this.db.find({}, function (err, organisers) {
+                // If error occurs reject the Promise
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(organisers); // Resolve with data
+                    console.log("function getAllOrganisers returns:", organisers); // Log for debugging
+                }
+            });
+        });
+    }
+    
+    deleteOrganiser(username) {
+        return new Promise((resolve, reject) => {
+            this.db.remove({ username: username }, {}, function (err, numRemoved) {
+                // If error occurs reject the Promise
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(numRemoved); // Resolve with number of documents removed
+                    console.log(`function deleteOrganiser removed ${numRemoved} organiser(s) with username: ${username}`);
+                }
+            });
+        });
+    }
+    
 }
+
+
 
 const dao = new organiserDAO("organisers.db");
 

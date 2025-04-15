@@ -1,0 +1,27 @@
+<head>
+{{>header}}
+</head>
+<h1>{{title}}</h1>
+<table class="table">
+  <thead>
+    <tr>
+      <th>Username</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#organisers}}
+      <tr>
+        <td>{{username}}</td>
+        <td>
+          <form action="/organisers/delete/{{username}}" method="POST">
+            <button class="btn btn-danger btn-sm">Delete</button>
+          </form>
+        </td>
+      </tr>
+    {{/organisers}}
+    {{^organisers}}
+      <tr><td colspan="2">No organisers found.</td></tr>
+    {{/organisers}}
+  </tbody>
+</table>

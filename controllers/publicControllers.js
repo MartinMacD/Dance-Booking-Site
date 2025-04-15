@@ -76,7 +76,7 @@ exports.show_classes = function(req, res) {
     .then((list) => {
       console.log("Class list:", list);
       res.render("public/classes", {
-        title: "All Classes",
+        title: "Classes",
         user: user,
         classes: list
       });
@@ -89,7 +89,7 @@ exports.show_classes = function(req, res) {
 
 exports.show_dashboard = function(req, res){
   res.render("organiser/dashboard", {
-    title: "Dance Class",
+    title: "Dashboard",
     user: req.user.username
   });
   console.log("req.user is:", req.user);
@@ -356,5 +356,33 @@ exports.create_new_organiser_form = function (req, res) {
         });
       };
 
+      exports.show_all_organisers = function (req, res) {
+        organiserDAO.getAllOrganisers()
+          .then((organisers) => {
+            res.render("organiser/allorganisers", {
+              title: "All Organisers",
+              organisers: organisers
+            });
+          })
+          .catch((err) => {
+            console.error("Error fetching organisers:", err);
+            res.status(500).send("Internal server error");
+          });
+      };
+      
+      
+      exports.delete_organiser = function (req, res) {
+        const username = req.params.username;
+      
+        organiserDAO.deleteOrganiser(username)
+          .then(() => {
+            res.redirect("/allorganisers");
+          })
+          .catch((err) => {
+            console.error("Error deleting organiser:", err);
+            res.status(500).send("Failed to delete organiser");
+          });
+      };
+      
 
 

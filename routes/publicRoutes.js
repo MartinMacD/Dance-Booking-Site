@@ -27,7 +27,9 @@ router.get("/participants/class/:classID", verify, controller.show_class_partici
 router.get("/participants/course/:courseID", verify, controller.show_course_participants);
 router.get("/participants/all", verify, controller.show_all_participants);
 router.get("/neworganiser", verify, controller.show_new_organiser_form);
-router.post("/neworganiser", verify, controller.create_new_organiser_form);
+router.post("/neworganiser", verify, controller.create_new_organiser_form); 
+router.get('/allorganisers', verify, controller.show_all_organisers);
+router.post('/organisers/delete/:username', verify, controller.delete_organiser);
 router.get("/", controller.landing_page);
 
 router.get("/logout", (req, res) => {
