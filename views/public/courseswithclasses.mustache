@@ -43,6 +43,7 @@ Add new class
                   <p><strong>Description:</strong> {{description}}</p>
                 </div>
                 {{#user}}
+                <a href="/editclass/{{classID}}" class="btn btn-secondary btn-sm">Edit</a>
                 <form action="/class/delete/{{classID}}" method="POST">
                   <button type="submit" class="btn btn-danger btn-sm">Delete</button>
                 </form>

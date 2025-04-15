@@ -96,7 +96,7 @@ class classDAO {
     
     getClassById(classId) {
         return new Promise((resolve, reject) => {
-            this.db.findOne({ id: classId }, function (err, classSession) {
+            this.db.findOne({ classID: classId }, function (err, classSession) {
                 if (err) {
                     reject(err);
                 } else {
@@ -132,6 +132,20 @@ class classDAO {
           });
         });
       }
+
+      updateClass(classID, updatedData) {
+        return new Promise((resolve, reject) => {
+          this.db.update({ classID: classID }, { $set: updatedData }, {}, (err, numReplaced) => {
+            if (err) {
+              reject(err);
+            } else {
+              console.log(`Updated ${numReplaced} classes with classID ${classID}`);
+              resolve(numReplaced);
+            }
+          });
+        });
+      }
+      
     
 }
 module.exports = classDAO;

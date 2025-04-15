@@ -17,6 +17,8 @@ router.get("/newcourse", verify, controller.show_new_course_form);
 router.post("/newcourse", verify, controller.create_new_course);
 router.post("/class/delete/:classID", verify, controller.delete_class);
 router.post('/courses/delete/:courseID', verify, controller.delete_course);
+router.get("/editclass/:classID", verify, controller.show_edit_class_form);
+router.post("/updateclass", verify, controller.update_class);
 router.get("/", controller.landing_page);
 
 router.get("/logout", (req, res) => {

@@ -41,6 +41,7 @@ Home
       <p class="card-text">Price: {{price}}</p>
 
       {{#user}}
+        <a href="/editclass/{{classID}}" class="btn btn-secondary btn-sm">Edit</a>
         <form method="POST" action="/class/delete/{{classID}}" style="display:inline;">
         <button type="submit" class="btn btn-danger btn-sm">Delete</button>
         </form>

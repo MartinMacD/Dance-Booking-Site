@@ -205,5 +205,41 @@ exports.create_new_course = function (req, res) {
   }
 };
 
+exports.show_edit_class_form = function (req, res) {
+  const classID = req.params.classID;
 
+  classDB.getClassById(classID)
+    .then((classData) => {
+      if (!classData) {
+        return res.status(404).send("Class not found");
+      }
+
+      const user = getUserFromToken(req);
+      res.render("organiser/editclass", {
+        title: "Edit Class",
+        user: user,
+        class: classData
+      });
+    })
+    .catch((err) => {
+      console.error("Error loading class for edit:", err);
+      res.status(500).send("Internal Server Error");
+    });
+};
+
+exports.update_class = function (req, res) {
+  const {
+    classID, courseID, name, date, time, description, location, price
+  } = req.body;
+
+  classDB.updateClass(classID, {courseID, name, date, time, description, location, price
+  })
+  .then(() => {
+    res.redirect("/classes");
+  })
+  .catch((err) => {
+    console.error("Error updating class:", err);
+    res.status(500).send("Failed to update class");
+  });
+};
 
