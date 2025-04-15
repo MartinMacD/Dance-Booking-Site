@@ -3,22 +3,18 @@
     {{>header}}
 </head>
 <body>
-  <!-- Navbar -->
   <div class="d-flex justify-content-between align-items-center p-2" style="background-color: #007BFF; width: 100%;">
 
-    <!-- Left side: Main navigation -->
     <div class="d-flex gap-2">
       <a id="home" href="/" class="btn btn-primary rounded-0">Home</a>
       <a id="courses" href="/courses" class="btn btn-primary rounded-0">Courses</a>
       <a id="classes" href="/classes" class="btn btn-primary rounded-0">Classes</a>
     </div>
 
-    <!-- Center: Title -->
     <div class="d-flex justify-content-center align-items-center flex-grow-1">
       <span class="text-white font-weight-bold">Glasgow Dance Studio</span>
     </div>
 
-    <!-- Right side: User authentication -->
     <div class="d-flex gap-2">
       {{^user}}
         <a id="login" href="/login" class="btn btn-primary rounded-0">Sign in</a>
@@ -31,12 +27,10 @@
     </div>
   </div>
 
-  <!-- Main Content -->
   <div class="d-flex justify-content-center align-items-center flex-grow-1">
     <h1>{{title}}</h1>
   </div>
   
-  <!-- Form Content -->
   <div class="container">
     <h2>New User Registration</h2>
     <form method="post" role="/neworganiser">
