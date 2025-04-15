@@ -2,21 +2,51 @@
 <head>
     {{>header}}
 </head>
-<body class="container">
-<h1>{{title}}</h1>
-<h2>New User Registration</h2>
-<form method="post" role="/register">
+<body>
+
+<div class="w-100 p-2 d-flex justify-content-between align-items-center" style="background-color: #007BFF;">
+  <div class="d-flex gap-2">
+    <a id="home" href="/" class="btn btn-primary rounded-0">Home</a>
+    <a id="courses" href="/courses" class="btn btn-primary rounded-0">Courses</a>
+    <a id="classes" href="/classes" class="btn btn-primary rounded-0">Classes</a>
+  </div>
+
+  <div class="d-flex justify-content-center align-items-center flex-grow-1">
+    <span class="text-white font-weight-bold">Glasgow Dance Studio</span>
+  </div>
+
+  <div class="d-flex gap-2">
+    {{^user}}
+      <a id="login" href="/login" class="btn btn-primary rounded-0">Sign in</a>
+      <a id="register" href="/register" class="btn btn-primary rounded-0">Register</a>
+    {{/user}}
+    {{#user}}
+      <a id="logout" href="/logout" class="btn btn-primary rounded-0">Sign out</a>
+      <a href="/dashboard" class="btn btn-primary rounded-0">Dashboard</a>
+    {{/user}}
+  </div>
+</div>
+
+<div class="container">
+  <div class="d-flex justify-content-center align-items-center my-4">
+    <h1>{{title}}</h1>
+  </div>
+
+  <form method="post" role="/register">
     <div class="form-group">
-        {{user-name-error}}
-        <label for="username">User Name</label>
-        <input type="text" class="form-control" id="username" name="username" placeholder="Enter user name" required>
+      {{user-name-error}}
+      <label for="username">User Name</label>
+      <input type="text" class="form-control" id="username" name="username" placeholder="Enter user name" required>
     </div>
     <div class="form-group">
-        <label for="password">Password (8 characters minimum)</label>
-        <input type="password" class="form-control" id="pass" name="pass" placeholder="Enter password" minlength="8" required>
+      <label for="password">Password (8 characters minimum)</label>
+      <input type="password" class="form-control" id="pass" name="pass" placeholder="Enter password" minlength="8" required>
     </div>
     <div class="form-group">
-        <input type="submit" value="Register" class="btn btn-primary">
+      <input type="submit" value="Register" class="btn btn-primary">
     </div>
-</form>
+  </form>
+</div>
+
 </body>
+</html>

@@ -21,7 +21,9 @@ exports.landing_page = function(req, res) {
 };
 
 exports.show_register_page = function(req, res) {
-    res.render("organiser/register");
+    res.render("organiser/register", {
+      title: "Register"
+    });
     };
 
 exports.post_new_organiser = function (req, res) {
@@ -44,7 +46,9 @@ exports.post_new_organiser = function (req, res) {
       };
 
 exports.show_login = function (req, res) {
-    res.render("organiser/login");
+    res.render("organiser/login",{
+      title: "Login"
+    });
   };
 
 exports.handle_login = function (req, res) {
@@ -281,13 +285,15 @@ exports.show_enrolled_page = (req, res) => {
 }
 
 exports.show_class_participants = (req, res) => {
+  const user = getUserFromToken(req);
   const classID = req.params.classID;
 
   enrolmentDB.getEnrolmentsByClassID(classID)
     .then((enrolments) => {
       res.render("organiser/participants", {
         title: "Class Participants",
-        participants: enrolments
+        participants: enrolments,
+        user: user
       });
     })
     .catch((err) => {
@@ -298,12 +304,14 @@ exports.show_class_participants = (req, res) => {
 
 exports.show_course_participants = (req, res) => {
   const courseID = req.params.courseID;
+  const user = getUserFromToken(req);
 
   enrolmentDB.getEnrolmentsByCourseID(courseID)
     .then((enrolments) => {
       res.render("organiser/participants", {
         title: "Course Participants",
-        participants: enrolments
+        participants: enrolments,
+        user: user
       });
     })
     .catch((err) => {
@@ -334,7 +342,8 @@ exports.show_all_participants = function (req, res) {
 };
 
 exports.show_new_organiser_form = function (req, res) {
-  res.render("organiser/neworganiser", { title: "Add New Organiser" });
+  const user = getUserFromToken(req);
+  res.render("organiser/neworganiser", { title: "Add New Organiser", user: user });
 };
 
 exports.create_new_organiser_form = function (req, res) {
@@ -357,11 +366,14 @@ exports.create_new_organiser_form = function (req, res) {
       };
 
       exports.show_all_organisers = function (req, res) {
+        const user = getUserFromToken(req);
         organiserDAO.getAllOrganisers()
           .then((organisers) => {
             res.render("organiser/allorganisers", {
               title: "All Organisers",
-              organisers: organisers
+              organisers: organisers,
+              user: user
+
             });
           })
           .catch((err) => {

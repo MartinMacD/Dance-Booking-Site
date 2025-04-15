@@ -29,7 +29,14 @@
   <h1>{{title}}</h1>
   </div>
 
-
+{{#user}}
+<div class="d-flex justify-content-center align-items-center flex-grow-1">
+  <a href="/newclass" class="btn btn-primary">
+     Add new class
+   </a>
+   </div>
+{{/user}}
+ 
 {{#classes}}
   <div class="card mb-3">
     <div class="card-body">
@@ -46,13 +53,13 @@
       <p class="card-text">Price: {{price}}</p>
 
       {{^user}}
-      <a href="/enrol/class/{{classID}}" class="btn btn-primary btn-sm">Enrol in Class</a>
+      <a href="/enrol/class/{{classID}}" class="btn btn-primary">Enrol in Class</a>
       {{/user}}
       {{#user}}
         <a href="/participants/class/{{classID}}" class="btn btn-info">View Participants</a>
-        <a href="/editclass/{{classID}}" class="btn btn-secondary btn-sm">Edit</a>
+        <a href="/editclass/{{classID}}" class="btn btn-secondary">Edit</a>
         <form method="POST" action="/class/delete/{{classID}}" style="display:inline;">
-        <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+        <button type="submit" class="btn btn-danger">Delete</button>
         </form>
       {{/user}}
     </div>
