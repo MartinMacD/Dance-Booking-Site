@@ -40,6 +40,7 @@ Home
       <p class="card-text">Location: {{location}}</p>
       <p class="card-text">Price: {{price}}</p>
 
+      <a href="/enrol/class/{{classID}}" class="btn btn-primary btn-sm">Enrol in Class</a>
       {{#user}}
         <a href="/editclass/{{classID}}" class="btn btn-secondary btn-sm">Edit</a>
         <form method="POST" action="/class/delete/{{classID}}" style="display:inline;">

@@ -1,11 +1,14 @@
 const organiserDAO = require("../models/organiserModel");
 const courseDAO = require("../models/courseModel");
-const classDAO = require("../models/classModel")
+const classDAO = require("../models/classModel");
+const EnrolmentDAO = require("../models/enrolmentModel");
 const { getUserFromToken } = require("../utils/authHelpers");
 
 const courseDB = new courseDAO("courses.db");
 
 const classDB = new classDAO("classes.db");
+
+const enrolmentDB = new EnrolmentDAO("enrolments.db");
 
 
 exports.landing_page = function(req, res) {
@@ -242,4 +245,38 @@ exports.update_class = function (req, res) {
     res.status(500).send("Failed to update class");
   });
 };
+
+exports.show_class_enrolment_form = (req, res) => {
+  const classID = req.params.classID;
+  res.render("public/enrol", {
+    title: "Enrol in Class",
+    classID: classID
+  });
+};
+
+exports.show_course_enrolment_form = (req, res) => {
+  const courseID = req.params.courseID;
+  res.render("public/enrol", {
+    title: "Enrol in Course",
+    courseID: courseID
+  });
+};
+
+exports.submit_enrolment = function (req, res) {
+  const { classID, courseID, name, email } = req.body;
+
+  console.log("Enrolment form data:", req.body);
+
+  try {
+    enrolmentDB.addEnrolment(classID || null, courseID || null, name, email);
+    res.redirect("/enrolled");
+  } catch (err) {
+    console.error("Enrolment error:", err);
+    res.status(500).send("Failed to enrol");
+  }
+};
+
+exports.show_enrolled_page = (req, res) => {
+  res.render("public/enrolled");
+}
 

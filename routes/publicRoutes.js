@@ -19,6 +19,10 @@ router.post("/class/delete/:classID", verify, controller.delete_class);
 router.post('/courses/delete/:courseID', verify, controller.delete_course);
 router.get("/editclass/:classID", verify, controller.show_edit_class_form);
 router.post("/updateclass", verify, controller.update_class);
+router.get("/enrol/class/:classID", controller.show_class_enrolment_form);
+router.get("/enrol/course/:courseID", controller.show_course_enrolment_form);
+router.post("/enrol", controller.submit_enrolment);
+router.get("/enrolled", controller.show_enrolled_page);
 router.get("/", controller.landing_page);
 
 router.get("/logout", (req, res) => {
