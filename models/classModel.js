@@ -21,22 +21,62 @@ class classDAO {
         this.db.insert({
             classID: 'cl001',
             courseID: 'co001',
-            name: 'Dance class',
-            date: 'Thursday',
+            name: 'Aerobics Class',
+            date: 'Thursday, 24th April 2025',
             time: '3 pm',
-            description: 'Dance class test',
+            description: 'Come and join us for aerobics!',
             location: 'Glasgow',
             price: '£5'
         })
         this.db.insert({
             classID: 'cl002',
             courseID: 'co001',
-            name: 'Dance class2',
-            date: 'Wednesday',
+            name: 'Ballet Class',
+            date: 'Wednesday, 23rd April 2025',
             time: '3 pm',
-            description: 'Dance class test',
+            description: 'Learn how to ballet!',
             location: 'Glasgow',
             price: '£5'
+        })
+        this.db.insert({
+          classID: 'cl003',
+          courseID: '',
+          name: 'Ballroom Dancing Class',
+          date: 'Friday, 25th April 2025',
+          time: '6 pm',
+          description: 'We will explain how ballroom dancing works.',
+          location: 'Glasgow',
+          price: '£10'
+        })
+        this.db.insert({
+          classID: 'cl004',
+          courseID: '',
+          name: 'Salsa Class',
+          date: 'Wednesday, 23rd April 2025',
+          time: '4 pm',
+          description: 'Come learn how to salsa.',
+          location: 'Glasgow',
+          price: '£15'
+        })
+        this.db.insert({
+          classID: 'cl005',
+          courseID: '',
+          name: 'Contemporary Dance Class',
+          date: 'Wednesday, 23rd April 2025',
+          time: '10 am',
+          description: 'Learn the modern dances of today.',
+          location: 'Glasgow',
+          price: '£10'
+        })
+        this.db.insert({
+          classID: 'cl006',
+          courseID: 'co002',
+          name: 'Tap dance class',
+          date: 'Wednesday, 30th April 2025',
+          time: '9 pm',
+          description: 'Come tap with us!.',
+          location: 'Glasgow',
+          price: '£10'
         })
         console.log("db inserted dance class");
     }

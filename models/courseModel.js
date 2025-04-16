@@ -20,13 +20,13 @@ class courseDAO {
     init(){
         this.db.insert({
             courseID: 'co001',
-            name: 'Dance course',
-            duration: '2 weeks'
+            name: 'Dance course 1',
+            duration: '12 weeks'
         })
         this.db.insert({
             courseID: 'co002',
             name: 'Dance course 2',
-            duration: '3 weeks'
+            duration: '12 weeks'
         })
         console.log('db inserted dance course');
     }
