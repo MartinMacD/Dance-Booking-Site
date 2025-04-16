@@ -1,3 +1,6 @@
+// Martin MacDonald
+// Web Application Development 2 - Practical coursework
+
 const express = require('express');
 const app = express(); //Instantiate express 
 require('dotenv').config() // loads data from .env file
