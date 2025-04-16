@@ -17,6 +17,7 @@ class classDAO {
         }
     }
 
+    //init is being used to insert placeholder data
     init(){
         this.db.insert({
             classID: 'cl001',
@@ -81,6 +82,7 @@ class classDAO {
         console.log("db inserted dance class");
     }
 
+    //This function is used to add a new class, takes in multiple fields as parameters
     addClass(classID, courseID, name, date, time, description, location, price) {
         //Not allowed to call a variable class so called classHolder instead
         var classHolder = {
@@ -94,6 +96,7 @@ class classDAO {
             price: price
         }
         console.log('Class created', classHolder);
+        //Display success or failure in console
         this.db.insert(classHolder, function (err, doc) {
             if (err) {
                 console.log("Error inserting document", name);
@@ -103,6 +106,7 @@ class classDAO {
         })
     }
 
+    //This function is used to get all classes from the model
     getAllClasses() {
         return new Promise((resolve, reject) => {
             this.db.find({}, function (err, classes) {
@@ -119,10 +123,12 @@ class classDAO {
         })
     }
 
+    //This function is used to get specific classes by course ID
     getClassesByCourseId(courseId) {
         return new Promise((resolve, reject) => {
-            console.log("Getting classes for courseId:", courseId); // Ensure this is correctly passed
+            console.log("Getting classes for courseId:", courseId); 
             
+            //Attempt to find classes based on courseID
             this.db.find({ courseID: courseId }, function (err, classes) {
                 if (err) {
                     reject(err);
@@ -133,9 +139,10 @@ class classDAO {
             });
         });
     }
-    
+    //This function is used to get specific classes by class ID
     getClassById(classId) {
         return new Promise((resolve, reject) => {
+          //Attempt to find classes based on classID
             this.db.findOne({ classID: classId }, function (err, classSession) {
                 if (err) {
                     reject(err);
@@ -147,8 +154,10 @@ class classDAO {
         });
     }
 
+    //This function is used to delete a class using classID
     deleteClass(classID) {
         return new Promise((resolve, reject) => {
+          //Attempt to delete from the model using the classID
           this.db.remove({ classID: classID }, {}, function (err, numRemoved) {
             if (err) {
               reject(err);
@@ -160,8 +169,10 @@ class classDAO {
         });
       }
 
+      //This function is used to delete a class using courseID
       deleteClassesByCourseId(courseID) {
         return new Promise((resolve, reject) => {
+          //Attempt to delete from the model using the courseID
           this.db.remove({ courseID: courseID }, { multi: true }, (err, numRemoved) => {
             if (err) {
               reject(err);
@@ -173,8 +184,10 @@ class classDAO {
         });
       }
 
+      //This function is used to update class data from parameters, updated data is passed in
       updateClass(classID, updatedData) {
         return new Promise((resolve, reject) => {
+          //The model attempts to update the class using the updatedData passed in
           this.db.update({ classID: classID }, { $set: updatedData }, {}, (err, numReplaced) => {
             if (err) {
               reject(err);

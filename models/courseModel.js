@@ -17,6 +17,7 @@ class courseDAO {
         }
     }
 
+    //init is being used to insert placeholder data
     init(){
         this.db.insert({
             courseID: 'co001',
@@ -31,6 +32,7 @@ class courseDAO {
         console.log('db inserted dance course');
     }
 
+    //This function is used to add a new course, takes in multiple fields as parameters
     addCourse(courseID, name, duration) {
         var course = {
             courseID: courseID,
@@ -38,6 +40,7 @@ class courseDAO {
             duration: duration
         }
         console.log('course created', course);
+        //Display success or failure in console
         this.db.insert(course, function (err, doc) {
             if (err) {
                 console.log('Error inserting document', name);
@@ -47,6 +50,7 @@ class courseDAO {
         })
     }
 
+    //This function is used to get all courses from the model
     getAllCourses() {
         return new Promise((resolve, reject) => {
             this.db.find({}, function (err, courses) {
@@ -63,8 +67,10 @@ class courseDAO {
         })
     }
 
+    //This function is used to get a specific course from the model using course name
     getCourseByName(courseName){
         return new Promise((resolve, reject) => {
+            //Attempt to find the course specified
             this.db.find({ 'name': courseName }, function (err, course) {
                 if (err) {
                     reject(err);
@@ -76,8 +82,10 @@ class courseDAO {
         })
     }
 
+    //This function is used to delete a specific course using course ID
     deleteCourse(courseID) {
         return new Promise((resolve, reject) => {
+            //Attempt to delete the course specified
           this.db.remove({ courseID: courseID }, {}, (err, numRemoved) => {
             if (err) {
               reject(err);

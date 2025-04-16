@@ -1,6 +1,10 @@
+//Used to create the database
 const Datastore = require("gray-nedb");
+//bcrypt is used for password hashing
 const bcrypt = require('bcrypt');
+//Sets number of salt rounds for bcrypt hashing
 const saltRounds = 10;
+//Used by node to read the filesystem
 const fs = require('fs');
 
 class organiserDAO{
@@ -16,7 +20,7 @@ class organiserDAO{
             console.log("DB connected to " + dbFilePath);
         }
     }
-
+    //init is being used to insert the admin account
     init(){
         this.db.insert({
             username: 'admin',
@@ -24,46 +28,55 @@ class organiserDAO{
         });
         return this;
     }
+    //This function creates a new organiser using username and password
     create(username, password) {
         const that = this;
+        //Hashes the password using the saltrounds and then stores username and password in the model
         bcrypt.hash(password, saltRounds).then(function(hash) {
             var entry = {
                 username: username,
                 password: hash,
             };
             that.db.insert(entry, function (err) {
+            //Display error if insertion failed
             if (err) {
             console.log("Can't insert user: ", username);
             }
             });
         });
     }
+    //This function is used to find a specific organiser 
     lookup(organiser, cb) {
         this.db.find({'username': organiser}, function (err, entries) {
         if (err) {
             return cb(null, null);
         } else {
+            //Return null if organiser isn't found
             if (entries.length == 0) {
                 return cb(null, null);
             }
+                //Return the found organiser if succesful
                 return cb(null, entries[0]);
             }
         });
     }
+    //This function gets all organisers from the model
     getAllOrganisers() {
         return new Promise((resolve, reject) => {
             this.db.find({}, function (err, organisers) {
                 // If error occurs reject the Promise
                 if (err) {
                     reject(err);
+                    //If succesful, pass the required organisers out of the function
                 } else {
-                    resolve(organisers); // Resolve with data
-                    console.log("function getAllOrganisers returns:", organisers); // Log for debugging
+                    resolve(organisers); 
+                    console.log("function getAllOrganisers returns:", organisers); 
                 }
             });
         });
     }
     
+    //This function is used to delete an organiser using their username
     deleteOrganiser(username) {
         return new Promise((resolve, reject) => {
             this.db.remove({ username: username }, {}, function (err, numRemoved) {
@@ -71,7 +84,8 @@ class organiserDAO{
                 if (err) {
                     reject(err);
                 } else {
-                    resolve(numRemoved); // Resolve with number of documents removed
+                    //Returns how many organisers were deleted and what their usernames were
+                    resolve(numRemoved); 
                     console.log(`function deleteOrganiser removed ${numRemoved} organiser(s) with username: ${username}`);
                 }
             });
