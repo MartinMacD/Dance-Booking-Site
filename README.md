@@ -14,13 +14,24 @@ Node.js, express, NeDB and mustache.
 
 ## Features: <br> 
 Users:  <br> 
-Browse courses & classes  <br> 
-Enrol in courses & classes <br> 
+* Browse courses & classes  <br> 
+* Enrol in courses & classes <br> 
 
 Organisers:  <br> 
-Login to the system  <br> 
-View participants, edit or delete a course or class  <br> 
-Add new courses and classes  <br> 
-See all enrolled participants  <br> 
-Add new organisers  <br> 
-View all organisers and remove organisers  <br> 
+* Login to the system  <br> 
+* View participants, edit or delete a course or class  <br> 
+* Add new courses and classes  <br> 
+* See all enrolled participants  <br> 
+* Add new organisers  <br> 
+* View all organisers and remove organisers  <br> 
+
+
+## Screenshots: <br> 
+### Home Page
+![Home Page](/Screenshots/HomePage.png?raw=true "Home Page") 
+### Classes Page
+![Classes Page](/Screenshots/Classes.png?raw=true "Classes Page") 
+### Courses Page
+![Courses Page](/Screenshots/Courses.png?raw=true "Courses Page") 
+### Admin Dashboard
+![Admin Dashboard](/Screenshots/Dashboard.png?raw=true "Admin Dashboard") 
