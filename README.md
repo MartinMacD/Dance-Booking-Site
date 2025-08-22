@@ -1,4 +1,4 @@
-Martin MacDonald - Dance booking system
+Dance booking system
 
 Made using:
 Node.js, express, NeDB and mustache.
